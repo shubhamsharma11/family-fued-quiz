@@ -52,15 +52,15 @@
 
       <v-card-actions> 
         <v-btn
-          color="info"
+          variant="outlined"
+          class="ma-3"
           @click="StartGame"
         >
           Start Game!
         </v-btn>
-        <v-spacer />
-        <rules-view></rules-view>
       </v-card-actions>
     </v-card>
+    <rules-view></rules-view>
   </v-container>
 </template>
 

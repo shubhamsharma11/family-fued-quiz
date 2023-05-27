@@ -5,36 +5,23 @@
     :scrim="false"
     transition="dialog-bottom-transition"
   >
-    <template v-slot:activator="{ props }">        
-      <v-btn
-        variant="plain"
-        color="warning"
-        size="x-small"
-        v-bind="props"
-      >
-        Rules
-      </v-btn>
+    <template v-slot:activator="{ props }">
+      <p class="text-caption font-weight-light font-italic pa-2"> 
+        * Please click <a class="v-link" v-bind="props">here</a> to view game rules
+      </p>
     </template>
     <v-card>
       <v-toolbar
         dark
-        color="primary"
       >
-        <v-btn
-          icon
-          dark
-          @click="dialog = false"
-        >
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-        <v-toolbar-title>Settings</v-toolbar-title>
+        <v-toolbar-title>Game Rules</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
           <v-btn
             variant="text"
             @click="dialog = false"
           >
-            Save
+            Close
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
@@ -90,5 +77,10 @@
   .dialog-bottom-transition-enter-active,
   .dialog-bottom-transition-leave-active {
     transition: transform .2s ease-in-out;
+  }
+
+  a {
+    text-decoration: underline;
+    cursor: pointer;
   }
 </style>
