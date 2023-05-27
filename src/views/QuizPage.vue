@@ -123,7 +123,7 @@
     <v-row>
       <v-btn
         v-if="isGameOver"
-        @onClick="showAllAnswers"
+        @click="showAllAnswers"
       >
         Show All Answers
       </v-btn>
@@ -160,7 +160,7 @@
         <v-divider />
         <v-card-actions>
           <v-btn
-            @onClick="gameOverDialog=false"
+            @click="gameOverDialog=false"
           >
             Close
           </v-btn>
@@ -221,8 +221,11 @@ export default {
     checkAnswer() {
       var result = null //this.answers.filter((x) => x["Title"] == this.answer);
 
+      // ans["Title"].toLowerCase().includes(this.answer.toLowerCase())
+
       this.answers.forEach(ans => {
-        if(ans["Title"] == this.answer)
+        var ansttl = String(ans["Title"])
+        if(ansttl && ansttl.toLowerCase() === this.answer.toLowerCase())
         {
           ans.isHidden = false;
           result = ans
