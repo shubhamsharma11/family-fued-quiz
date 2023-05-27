@@ -120,13 +120,59 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-alert
+    <v-row>
+      <v-btn
+        v-if="isGameOver"
+        @onClick="showAllAnswers"
+      >
+        Show All Answers
+      </v-btn>
+      <v-spacer />
+      <v-btn
+        v-if="isGameOver"
+        to="/"
+      >
+        Play Again
+      </v-btn>
+    </v-row>
+    <!-- <v-alert
       v-model="isGameOver"
       color="success"
       icon="$success"
       title="Congratulations!!!"
       :text="`${winner.Title}, You have won the game with ${winner.Score} points`"
-    ></v-alert>
+    ></v-alert> -->
+    <v-dialog
+      transition="dialog-top-transition"
+      width="auto"
+      v-model="gameOverDialog"
+      persistent
+    >
+      <v-card>
+        <v-toolbar
+          align="center"
+          title="Game Over!!!"
+        ></v-toolbar>
+        <v-card-title align="center">Congratulations!!!</v-card-title>
+        <v-card-text>
+          {{ winner.Title }}, You have won the game with {{ winner.Score }} points
+        </v-card-text>
+        <v-divider />
+        <v-card-actions>
+          <v-btn
+            @onClick="gameOverDialog=false"
+          >
+            Close
+          </v-btn>
+          <v-spacer />
+          <v-btn
+            to="/"
+          >
+            Play Again
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -139,6 +185,7 @@ export default {
       currentCount: 1,
       answer: "",
       isGameOver: false,
+      gameOverDialog: false,
       winner: {},
     };
   },
@@ -218,6 +265,7 @@ export default {
               otherPlayer.Score += x.Score
               x.Score = 0
               this.winner = otherPlayer;
+              this.gameOverDialog = true;
             }
           }
         });
@@ -226,6 +274,11 @@ export default {
       }
       this.answer = ''
     },
+    showAllAnswers() {
+      this.answers.forEach(ans => {
+          ans.isHidden = false;
+      });
+    }
   },
 };
 </script>
