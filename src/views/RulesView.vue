@@ -7,14 +7,14 @@
   >
     <template v-slot:activator="{ props }">
       <p class="text-caption font-weight-light font-italic pa-2"> 
-        * Please click <a class="v-link" v-bind="props">here</a> to view game rules
+        * Please click <a class="v-link" v-bind="props">here</a> to view Rules, Terms And Conditions of the game
       </p>
     </template>
     <v-card>
       <v-toolbar
         dark
       >
-        <v-toolbar-title>Game Rules</v-toolbar-title>
+        <v-toolbar-title>Rules, Terms And Conditions</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
           <v-btn
@@ -25,34 +25,21 @@
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
-      <v-list
-        lines="two"
-        subheader
-      >
-        <v-list-subheader>User Controls</v-list-subheader>
-        <v-list-item title="Content filtering" subtitle="Set the content filtering level to restrict apps that can be downloaded"></v-list-item>
-        <v-list-item title="Password" subtitle="Require password for purchase or use password to restrict purchase"></v-list-item>
-      </v-list>
-      <v-divider></v-divider>
-      <v-list
-        lines="two"
-        subheader
-      >
-        <v-list-subheader>General</v-list-subheader>
-        <v-list-item title="Notifications" subtitle="Notify me about updates to apps or games that I downloaded">
-          <template v-slot:prepend>
-            <v-checkbox v-model="notifications"></v-checkbox>
-          </template>
+      <v-list lines="one">
+        <v-list-subheader>Rules</v-list-subheader>
+        <v-list-item 
+          v-for="(rule, i) in gameRules" 
+          :key="i"
+        >
+          <v-list-item-title>{{ i + 1 }}. {{ rule }}</v-list-item-title>
         </v-list-item>
-        <v-list-item title="Sound" subtitle="Auto-update apps at any time. Data charges may apply">
-          <template v-slot:prepend>
-            <v-checkbox v-model="sound"></v-checkbox>
-          </template>
-        </v-list-item>
-        <v-list-item title="Auto-add widgets" subtitle="Automatically add home screen widgets">
-          <template v-slot:prepend>
-            <v-checkbox v-model="widgets"></v-checkbox>
-          </template>
+        <v-divider></v-divider>
+        <v-list-subheader>Terms And Conditions</v-list-subheader>
+        <v-list-item 
+          v-for="(term, i) in termsConditions" 
+          :key="i"
+        >
+          <v-list-item-title>{{ i + 1 }}. {{ term }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-card>
@@ -60,6 +47,7 @@
 </template>
 
 <script>
+  import { rules, terms } from "../../rules";
   export default {
     name: 'RulesView',
     data () {
@@ -68,6 +56,8 @@
         notifications: false,
         sound: true,
         widgets: false,
+        gameRules: rules,
+        termsConditions: terms,
       }
     },
   }

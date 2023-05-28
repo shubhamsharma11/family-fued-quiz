@@ -77,11 +77,9 @@ export default {
           if (this.flipResult <= 0.5) {
             this.coinClass = 'heads';
             this.result = 'Team Red';
-            this.$store.commit('SET_CURRENT_TEAM', this.result)
           } else {
             this.coinClass = 'tails';
             this.result = 'Team Blue';
-            this.$store.commit('SET_CURRENT_TEAM', this.result)
           }
         }, 100);
         
@@ -106,6 +104,7 @@ export default {
         element.Retry = 5
       });
       this.$store.commit('SET_TEAMS', teams)
+      this.$store.commit('SET_CURRENT_TEAM', this.result)
       
       this.dialog = false
     }
